@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "845637057386",
+    "project_id": "camivets-f0351",
+    "storage_bucket": "camivets-f0351.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845637057386:android:b8d97d3ad058e2aff18313",
+        "android_client_info": {
+          "package_name": "com.example.camivets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845637057386-1g4cj48qqrvm6s4fnucjb4o8ope5a9bp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNSbXK5yFWupmJbZcvXcusWRE8qHZcGm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845637057386-1g4cj48qqrvm6s4fnucjb4o8ope5a9bp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

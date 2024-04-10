@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Camivets</string>
+    <string name="txtMain">O Inicia Sesión con:</string>
+    <string name="txtGoogle">Google</string>
+    <string name="txtFacebook">Facebook</string>
+    <string name="client_id">845637057386-1g4cj48qqrvm6s4fnucjb4o8ope5a9bp.apps.googleusercontent.com</string>
+    <string name="txtName"> </string>
+    <string name="txtMail"> </string>
+    <string name="title_activity_nav_camivets">Nav_Camivets</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="titleRegister">Registro</string>
+    <string name="name">Nombre</string>
+    <string name="secondName">Segundo nombre</string>
+    <string name="lastName">Primer Apelliido</string>
+    <string name="secondLastname">Segundo Apellido</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="confirmPassword">Confirmar contraseña</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+</resources>
