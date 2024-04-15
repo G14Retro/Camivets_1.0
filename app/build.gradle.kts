@@ -49,4 +49,6 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.facebook.android:facebook-android-sdk:[4,5)")
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
 }
