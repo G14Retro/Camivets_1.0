@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import models.UserModel;
+
 public class RegisterActivity extends AppCompatActivity {
     TextView name,secondName,lastName,secondLastName,email,password,confirmPassword;
     @Override
@@ -37,5 +39,12 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this,"Las contraseñas no coinciden",Toast.LENGTH_SHORT).show();
             return;
         }
+        UserModel userRegister = new UserModel();
+        userRegister.Name = name.getText().toString();
+        userRegister.SecondName = secondName.getText().toString();
+        userRegister.LastName = lastName.getText().toString();
+        userRegister.SecondLastname = secondLastName.getText().toString();
+        userRegister.Email = email.getText().toString();
+        userRegister.Password = password.getText().toString();
     }
 }

@@ -44,11 +44,12 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 
-    FirebaseAuth auth,mAuth;
+    private FirebaseAuth auth,mAuth;
     FirebaseUser user;
     GoogleSignInClient googleSignInClient;
     TextView name, mail;
     CallbackManager mCallbackManager;
+    private LoginButton btnFace;
     private final ActivityResultLauncher<Intent> intentActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -90,9 +91,10 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         mCallbackManager = CallbackManager.Factory.create();
         mAuth = FirebaseAuth.getInstance();
-        LoginButton loginButton = findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        btnFace = findViewById(R.id.login_button);
+
+        btnFace.setReadPermissions("email", "public_profile");
+        btnFace.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "facebook:onError", error);
             }
         });
+
     }
 
     @Override
@@ -166,6 +169,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public  void sessionFacebook(View view){
-
+        btnFace.callOnClick();
     }
 }
