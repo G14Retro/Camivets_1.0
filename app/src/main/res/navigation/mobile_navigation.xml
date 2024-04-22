@@ -12,14 +12,37 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.camivets.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_servicios"
+        android:name="com.example.camivets.ui.servicios.ServiciosFragment"
+        android:label="@string/menu_servicios"
+        tools:layout="@layout/fragment_servicios" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.camivets.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_sedes"
+        android:name="com.example.camivets.ui.sedes.SedesFragment"
+        android:label="@string/menu_sedes"
+        tools:layout="@layout/fragment_sedes"/>
+
+    <fragment
+        android:id="@+id/nav_veterinarias"
+        android:name="com.example.camivets.ui.veterinarias.VeterinariasFragment"
+        android:label="@string/menu_veterinarias"
+        tools:layout="@layout/fragment_veterinarias"/>
+
+    <fragment
+        android:id="@+id/nav_planes"
+        android:name="com.example.camivets.ui.planes.PlanesFragment"
+        android:label="@string/menu_planes"
+        tools:layout="@layout/fragment_planes"/>
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.camivets.ui.profile.ProfileFragment"
+        android:label="@string/menu_account"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>

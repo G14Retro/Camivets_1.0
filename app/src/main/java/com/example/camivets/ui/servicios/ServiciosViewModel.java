@@ -1,16 +1,16 @@
-package com.example.camivets.ui.gallery;
+package com.example.camivets.ui.servicios;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class ServiciosViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public ServiciosViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("This is servicios fragment");
     }
 
     public LiveData<String> getText() {

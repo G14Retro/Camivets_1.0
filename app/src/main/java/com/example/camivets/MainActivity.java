@@ -2,7 +2,9 @@ package com.example.camivets;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +46,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
 
+    private SharedPreferences sharedPreferences;
+    private static final String KEY = "stored_login";
+    private boolean isLogin = false;
     private FirebaseAuth auth,mAuth;
     FirebaseUser user;
     GoogleSignInClient googleSignInClient;
@@ -64,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
                                  if (task.isSuccessful()){
                                      auth = FirebaseAuth.getInstance();
                                      Toast.makeText(MainActivity.this,"Has iniciado sesión correctamente!",Toast.LENGTH_SHORT).show();
+                                     ValidateUserBD(auth.getCurrentUser().getEmail(),auth.getCurrentUser().getDisplayName());
                                      goToHome();
+                                     setIsLogin(true);
                                  }else {
                                      Toast.makeText(MainActivity.this,"Error al iniciar: " + task.getException(),Toast.LENGTH_SHORT).show();
                                  }
@@ -88,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        if (validateIsLogin()){
+            goToHome();
+        }
+
         FirebaseApp.initializeApp(this);
         mCallbackManager = CallbackManager.Factory.create();
         mAuth = FirebaseAuth.getInstance();
@@ -135,7 +147,9 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             user = mAuth.getCurrentUser();
                             assert user != null;
+                            Toast.makeText(MainActivity.this,"Has iniciado sesión correctamente!",Toast.LENGTH_SHORT).show();
                             goToHome();
+                            setIsLogin(true);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -171,4 +185,21 @@ public class MainActivity extends AppCompatActivity {
     public  void sessionFacebook(View view){
         btnFace.callOnClick();
     }
+
+    private void ValidateUserBD(String email, String name){
+
+    }
+
+    private boolean validateIsLogin(){
+        sharedPreferences = getSharedPreferences("isAuth", Context.MODE_PRIVATE);
+        isLogin = sharedPreferences.getBoolean(KEY,false);
+        return isLogin;
+    }
+
+    private void setIsLogin(boolean login){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(KEY,login);
+        editor.apply();
+    }
+
 }
