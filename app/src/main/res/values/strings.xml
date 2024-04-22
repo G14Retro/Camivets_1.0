@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Camivets</string>
+    <string name="txtMain">O Inicia Sesión con:</string>
+    <string name="txtGoogle">Google</string>
+    <string name="txtFacebook">Facebook</string>
+    <string name="client_id">845637057386-1g4cj48qqrvm6s4fnucjb4o8ope5a9bp.apps.googleusercontent.com</string>
+    <string name="txtName"> </string>
+    <string name="txtMail"> </string>
+    <string name="title_activity_nav_camivets">Nav_Camivets</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_exit">Cerrar Sesión</string>
+
+    <string name="titleRegister">Registro</string>
+    <string name="name">Nombre</string>
+    <string name="secondName">Segundo nombre</string>
+    <string name="lastName">Primer Apelliido</string>
+    <string name="secondLastname">Segundo Apellido</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="confirmPassword">Confirmar contraseña</string>
+
+    <string name="menu_home">Inicio</string>
+    <string name="menu_servicios">Servicios</string>
+    <string name="menu_sedes">Sedes</string>
+    <string name="menu_veterinarias">Veterinarias 24/7</string>
+    <string name="menu_planes">Planes</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_account">Mi cuenta</string>
+    <string name="menu_logOut">Cerrar Sesión</string>
+
+    <string name="facebook_app_id">735913578738485</string>
+    <string name="fb_login_protocol_scheme">fb735913578738485</string>
+    <string name="facebook_client_token">43717849c28fa1af9125c18ab09489b5</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
