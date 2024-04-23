@@ -53,4 +53,7 @@ dependencies {
     implementation("com.facebook.android:facebook-android-sdk:[5,6)")
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.facebook.android:facebook-login:latest.release")
+    implementation ("com.google.firebase:firebase-auth:21.0.1")
+    implementation ("com.google.firebase:firebase-firestore:24.11.1")
+    implementation("com.google.firebase:firebase-analytics-ktx")
 }

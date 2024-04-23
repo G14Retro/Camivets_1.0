@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -97,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Inicializa la Autenticación de Firebase
+        mAuth = FirebaseAuth.getInstance();
+
         if (validateIsLogin()){
             goToHome();
         }else {
@@ -118,16 +123,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-            }
+            public void onCancel() {}
 
             @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-            }
+            public void onError(FacebookException error) {}
         });
 
+        Button btnLogin = findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signInWithEmailAndPassword();
+            }
+        });
     }
 
     @Override
@@ -205,5 +213,34 @@ public class MainActivity extends AppCompatActivity {
         editor.putBoolean(KEY,login);
         editor.apply();
     }
+    private void signInWithEmailAndPassword() {
+        EditText editTextEmail = findViewById(R.id.txtUser);
+        EditText editTextPassword = findViewById(R.id.txtPassword);
 
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(MainActivity.this, "Por favor ingresa un correo y contraseña válidos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        auth = FirebaseAuth.getInstance();
+        final FirebaseAuth finalAuth = auth; // Declarar finalAuth como efectivamente final
+
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Inicio de sesión exitoso
+                        FirebaseUser user = finalAuth.getCurrentUser(); // Usar finalAuth en lugar de auth
+                        // Actualiza la UI
+                        goToHome();
+                        setIsLogin(true);
+                    } else {
+                        // Fallo en el inicio de sesión
+                        String errorMessage = task.getException().getMessage();
+                        Toast.makeText(MainActivity.this, "Fallo en el inicio de sesión: " + errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 }
