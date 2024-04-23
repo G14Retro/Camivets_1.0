@@ -57,35 +57,35 @@ public class MainActivity extends AppCompatActivity {
     TextView name, mail;
     CallbackManager mCallbackManager;
     private LoginButton btnFace;
-
     private final ActivityResultLauncher<Intent> intentActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
-            if (result.getResultCode()== RESULT_OK){
-                Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
-                try {
-                    GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
-                    AuthCredential  authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(),null);
-                    auth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                auth = FirebaseAuth.getInstance();
-                                Toast.makeText(MainActivity.this,"Has iniciado sesión correctamente!",Toast.LENGTH_SHORT).show();
-                                ValidateUserBD(auth.getCurrentUser().getEmail(),auth.getCurrentUser().getDisplayName());
-                                goToHome();
-                                setIsLogin(true);
-                            }else {
-                                Toast.makeText(MainActivity.this,"Error al iniciar: " + task.getException(),Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } catch (ApiException e) {
-                    e.printStackTrace();
-                }
-            }
+                 if (result.getResultCode()== RESULT_OK){
+                     Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
+                     try {
+                        GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
+                         AuthCredential  authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(),null);
+                         auth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                             @Override
+                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                 if (task.isSuccessful()){
+                                     auth = FirebaseAuth.getInstance();
+                                     Toast.makeText(MainActivity.this,"Has iniciado sesión correctamente!",Toast.LENGTH_SHORT).show();
+                                     ValidateUserBD(auth.getCurrentUser().getEmail(),auth.getCurrentUser().getDisplayName());
+                                     goToHome();
+                                     setIsLogin(true);
+                                 }else {
+                                     Toast.makeText(MainActivity.this,"Error al iniciar: " + task.getException(),Toast.LENGTH_SHORT).show();
+                                 }
+                             }
+                         });
+                     } catch (ApiException e) {
+                         e.printStackTrace();
+                     }
+                 }
         }
     });
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         btnFace.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
@@ -131,6 +132,16 @@ public class MainActivity extends AppCompatActivity {
                 signInWithEmailAndPassword();
             }
         });
+            public void onCancel() {
+                Log.d(TAG, "facebook:onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "facebook:onError", error);
+            }
+        });
+
     }
 
     @Override
