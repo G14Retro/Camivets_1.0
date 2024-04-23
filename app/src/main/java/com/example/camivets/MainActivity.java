@@ -27,6 +27,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -98,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (validateIsLogin()){
             goToHome();
+        }else {
+            GoogleSignIn.getClient(getApplicationContext(), GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
+            LoginManager.getInstance().logOut();
         }
 
         FirebaseApp.initializeApp(this);
@@ -153,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.makeText(MainActivity.this, "Error en la autenticación.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
