@@ -132,16 +132,6 @@ public class MainActivity extends AppCompatActivity {
                 signInWithEmailAndPassword();
             }
         });
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-            }
-        });
-
     }
 
     @Override
