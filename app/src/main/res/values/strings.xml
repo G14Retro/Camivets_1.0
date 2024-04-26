@@ -32,9 +32,12 @@
     <string name="menu_account">Mi cuenta</string>
     <string name="menu_logOut">Cerrar Sesión</string>
 
+    <string name="sedes_title">Sedes asociadas</string>
+
     <string name="facebook_app_id">735913578738485</string>
     <string name="fb_login_protocol_scheme">fb735913578738485</string>
     <string name="facebook_client_token">43717849c28fa1af9125c18ab09489b5</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
