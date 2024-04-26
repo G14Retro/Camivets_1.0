@@ -128,7 +128,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.62"
-        tools:text="Registarse" />
+        tools:text="Registarse"
+        android:textColor="@color/design_default_color_primary"
+        style="?attr/materialButtonOutlinedStyle"
+        app:strokeColor="@color/design_default_color_primary"/>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/Inicio_button"
