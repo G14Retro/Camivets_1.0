@@ -59,4 +59,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation ("com.google.android.gms:play-services-maps:18.0.1")
+    implementation ("com.google.android.gms:play-services-location:18.0.0")
 }

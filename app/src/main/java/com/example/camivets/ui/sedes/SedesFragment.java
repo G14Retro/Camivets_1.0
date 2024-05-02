@@ -38,7 +38,7 @@ import java.util.List;
 
 import models.SedesModel;
 
-public class SedesFragment extends Fragment {
+public class  SedesFragment extends Fragment {
 
     private FragmentSedesBinding binding;
     private List<SedesModel> sedes;
@@ -86,12 +86,12 @@ public class SedesFragment extends Fragment {
                     }
                 });
 
-        sedes.add(new SedesModel("2","prueba1",true,"falsa123"));
-        sedes.add(new SedesModel("2","prueba2",true,"falsa123"));
-        sedes.add(new SedesModel("2","prueba3",true,"falsa123"));
-        sedes.add(new SedesModel("2","prueba4",true,"falsa123"));
-        sedes.add(new SedesModel("2","prueba5",true,"falsa123"));
-        sedes.add(new SedesModel("2","prueba6",true,"falsa123"));
+        sedes.add(new SedesModel("2","Sede Engativa",true,"falsa123"));
+        sedes.add(new SedesModel("2","Sede Suba",true,"falsa123"));
+        sedes.add(new SedesModel("2","Sede Norte",true,"falsa123"));
+        sedes.add(new SedesModel("2","Sede Sur",true,"falsa123"));
+        sedes.add(new SedesModel("2","Sede Centro",true,"falsa123"));
+        sedes.add(new SedesModel("2","Sede 85",true,"falsa123"));
         sedeRecyclerView = rootView.findViewById(R.id.list_sedes);
         sedeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         SedesAdapter sedesAdapter = new SedesAdapter(sedes);
