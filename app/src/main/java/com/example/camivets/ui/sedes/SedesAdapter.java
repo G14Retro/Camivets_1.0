@@ -35,7 +35,7 @@ public class SedesAdapter extends RecyclerView.Adapter<SedesAdapter.SedesViewHol
     public void onBindViewHolder(@NonNull SedesAdapter.SedesViewHolder holder, int position) {
         SedesModel sedesModel = sedesList.get(position);
         holder.name.setText(sedesModel.getName());
-        holder.address.setText(sedesModel.getName());
+        holder.address.setText(sedesModel.getIdSede());
     }
 
     @Override
