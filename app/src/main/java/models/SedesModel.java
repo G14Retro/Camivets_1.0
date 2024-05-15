@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public class SedesModel {
-    public String IdSede;
-    public String Name;
-    public boolean Everytime;
-    public String Address;
-    public List<ServicesModel> Services;
-    public LocationModel Location;
+    public String id;
+    public String name;
+    public boolean everytime;
+    public List<ServicesModel> services;
+    public LocationModel location;
 
     // Constructor vacío requerido por Firestore
     public SedesModel(){
@@ -19,62 +18,62 @@ public class SedesModel {
     }
 
     public SedesModel(String idSede, String name, boolean everytime, ArrayList<ServicesModel> services,LocationModel location) {
-        this.IdSede = idSede;
-        this.Name = name;
-        this.Everytime = everytime;
-        this.Services = services;
-        this.Location = location;
+        this.id = idSede;
+        this.name = name;
+        this.everytime = everytime;
+        this.services = services;
+        this.location = location;
 
     }
 
     // Método para convertir SedesModel a Map
     public Map<String, Object> toMap() {
         Map<String, Object> map = new HashMap<>();
-        map.put("name", Name);
-        map.put("location", Location);
-        map.put("services", Services);
-        map.put("everytime", Everytime);
+        map.put("name", name);
+        map.put("location", location);
+        map.put("services", services);
+        map.put("everytime", everytime);
         return map;
     }
 
     public void setIdSede(String idSede) {
-        this.IdSede = idSede;
+        this.id = idSede;
     }
 
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
 
     public void setServices(List<ServicesModel> services) {
-        this.Services = services;
+        this.services = services;
     }
 
     public void setLocation(LocationModel location) {
-        this.Location = location;
+        this.location = location;
     }
 
-    public String getIdSede() {
-        return IdSede;
-    }
+    /*public String getIdSede() {
+        return id;
+    }*/
 
     public String getName() {
-        return Name;
+        return name;
     }
 
    public List<ServicesModel> getServices() {
-        return Services;
+        return services;
     }
 
     public LocationModel getLocation() {
-        return Location;
+        return location;
     }
 
     public boolean isEverytime() {
-        return Everytime;
+        return everytime;
     }
 
     public void setEverytime(boolean everytime) {
-        Everytime = everytime;
+        everytime = everytime;
     }
 }
 

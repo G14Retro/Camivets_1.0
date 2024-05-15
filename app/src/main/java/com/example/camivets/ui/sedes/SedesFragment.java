@@ -35,11 +35,15 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
+import models.LocationModel;
 import models.SedesModel;
+import models.ServicesModel;
 
 public class  SedesFragment extends Fragment {
 
@@ -71,10 +75,11 @@ public class  SedesFragment extends Fragment {
         binding = null;
     }
 
-    public View init(View rootView){
+    private View init(View rootView){
         sedes = new ArrayList<>();
         mFireStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        SedesModel sedeModel = new SedesModel();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             mFireStore.collection("Sedes")
@@ -87,11 +92,9 @@ public class  SedesFragment extends Fragment {
                             if (!queryDocumentSnapshots.isEmpty()) {
                                 for (int i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++) {
                                     DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(i);
-                                    sedes.add(
-                                            new SedesModel(documentSnapshot.getId(),
-                                                    documentSnapshot.getString("name"),
-                                                    documentSnapshot.getBoolean("everytime"),
-                                                    "falsa123"));
+                                    SedesModel sede = documentSnapshot.toObject(SedesModel.class);
+                                    sede.id = documentSnapshot.getId();
+                                    sedes.add(sede);
                                 }
                                 sedeRecyclerView = rootView.findViewById(R.id.list_sedes);
                                 sedeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -110,6 +113,10 @@ public class  SedesFragment extends Fragment {
             Log.d(TAG, "onSuccess: No se encontró el perfil del usuario");
         }
         return  rootView;
+    }
+
+    public void goToSedeById(View view){
+        view.getId();
     }
 
 }
