@@ -2,10 +2,7 @@ package com.example.camivets.ui.sedes;
 
 import static android.app.PendingIntent.getActivity;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,21 +10,27 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.camivets.NavCamivets;
 import com.example.camivets.R;
 
 import java.util.List;
 
+import Interfaces.AdapterListener;
 import models.SedesModel;
 
 public class SedesAdapter extends RecyclerView.Adapter<SedesAdapter.SedesViewHolder> {
     private List<SedesModel> sedesList;
     private Context context;
 
-    public SedesAdapter(List<SedesModel> sedesList) {
+    private NavController navController;
+    private AdapterListener listener;
+
+    public SedesAdapter(List<SedesModel> sedesList, NavController  navController) {
         this.sedesList = sedesList;
+        this.navController = navController;
+        //this.listener = listener;
     }
 
     @NonNull
@@ -46,8 +49,8 @@ public class SedesAdapter extends RecyclerView.Adapter<SedesAdapter.SedesViewHol
         holder.btnSede.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, NavCamivets.class);
-                context.startActivity(intent);
+                //listener.onItemSelected(sedesModel);
+                navController.navigate(R.id.nav_sedeDatail);
             }
         });
     }

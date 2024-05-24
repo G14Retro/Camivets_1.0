@@ -103,7 +103,7 @@ public class ProfileFragment extends Fragment {
                                 });
                             } else {
                                 // No se encontraron documentos con el correo electrónico del usuario actual
-                                Toast.makeText(getContext(), "No se encontró el perfil del usuario", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Por favor completa tu registro", Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, "onSuccess: No se encontró el perfil del usuario");
                             }
                         }

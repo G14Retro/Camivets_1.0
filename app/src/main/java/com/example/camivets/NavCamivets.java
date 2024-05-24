@@ -5,12 +5,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,12 +30,24 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.camivets.databinding.ActivityNavCamivetsBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Objects;
 
 public class NavCamivets extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavCamivetsBinding binding;
-    private static final String KEY = "stored_login";
+    private  NavController navController;
+    private static final String KEY = "stored_login", KEY_REGISTER = "stored_register";
+
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+    private static final String TAG = "ProfileFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +55,8 @@ public class NavCamivets extends AppCompatActivity {
 
         binding = ActivityNavCamivetsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        validateRegister();
 
         setSupportActionBar(binding.appBarNavCamivets.toolbar);
         binding.appBarNavCamivets.fab.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +75,7 @@ public class NavCamivets extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_servicios, R.id.nav_sedes, R.id.nav_veterinarias, R.id.nav_planes, R.id.nav_profile, R.id.nav_exit)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_nav_camivets);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_nav_camivets);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -67,6 +86,7 @@ public class NavCamivets extends AppCompatActivity {
                 if (id==R.id.nav_exit){
                     logOutDialog(NavCamivets.this);
                 }
+                validateRegister();
                 //This is for maintaining the behavior of the Navigation view
                 NavigationUI.onNavDestinationSelected(menuItem,navController);
                 //This is for closing the drawer after acting on it
@@ -118,4 +138,63 @@ public class NavCamivets extends AppCompatActivity {
         });
         builder.show();
     }
+
+    private void validateRegister(){
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            String userEmail = currentUser.getEmail();
+
+            // Realizar una consulta para buscar el documento del cliente por correo electrónico
+            db.collection("Clientes")
+                    .whereEqualTo("Email", userEmail) // Asegúrate de que coincida con el nombre del campo en tu base de datos
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            // Verificar si se encontró algún documento
+                            if (!queryDocumentSnapshots.isEmpty()) {
+                                // Suponiendo que solo hay un documento con el correo electrónico único,
+                                // puedes acceder al primer documento en la lista de resultados
+                                DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+
+                                // Agregar un log para verificar si la consulta trae algo
+                                Log.d(TAG, "onSuccess: Se encontraron documentos en la colección 'Clientes'");
+
+
+                                // Obtener los datos del documento y mostrarlos en los EditText
+                                String name = Objects.requireNonNull(documentSnapshot.getString("Name"));
+                                String lastName = Objects.requireNonNull(documentSnapshot.getString("LastName"));
+                                String secondName = documentSnapshot.getString("SecondName");
+                                String secondLastName = documentSnapshot.getString("SecondLastName");
+                                String email = Objects.requireNonNull(documentSnapshot.getString("Email"));
+
+                                // Implementar la lógica para actualizar la información del perfil cuando se hace clic en el botón "Guardar cambios"
+
+
+
+                            } else {
+                                // No se encontraron documentos con el correo electrónico del usuario actual
+                                navController.navigate(R.id.nav_profile);
+                                Log.d(TAG, "onSuccess: No se encontró el perfil del usuario");
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Manejar cualquier error de consulta
+                            Toast.makeText(getParent(), "Error al buscar el perfil del usuario", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, "onFailure: Error al buscar el perfil del usuario", e);
+                        }
+                    });
+        } else {
+            // Manejar el caso en que el usuario no esté autenticado
+            Toast.makeText(this, "Usuario no autenticado", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onCreateView: Usuario no autenticado");
+        }
+    }
+
 }
